@@ -1,4 +1,4 @@
-import { SearchResponse } from '../types';
+import { Repository, SearchResponse } from '../types';
 
 const BASE_URL = import.meta.env.VITE_GITHUB_URL;
 
@@ -41,6 +41,15 @@ export async function searchRepositories(query: string, page: number = 1): Promi
   
   const response = await fetchWithErrorHandling(url);
   const data: SearchResponse = await response.json();
+  
+  return data;
+}
+
+export async function getRepositoryDetails(owner: string, repo: string): Promise<Repository> {
+  const url = `${BASE_URL}/repos/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}`;
+  
+  const response = await fetchWithErrorHandling(url);
+  const data: Repository = await response.json();
   
   return data;
 }
