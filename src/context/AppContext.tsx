@@ -2,6 +2,7 @@ import React, { createContext, useContext, useReducer, ReactNode } from 'react';
 import { AppState, AppAction } from '../types';
 
 const initialState: AppState = {
+  repositories: [],
   loading: false,
   error: null,
   currentPage: 1,
@@ -19,6 +20,14 @@ function appReducer(state: AppState, action: AppAction): AppState {
   switch (action.type) {
     case 'SET_LOADING':
       return { ...state, loading: action.payload };
+    case 'SET_REPOSITORIES':
+      return {
+        ...state,
+        repositories: action.payload.repositories,
+        totalCount: action.payload.totalCount,
+        loading: false,
+        error: null,
+      };
     case 'SET_ERROR':
       return { ...state, error: action.payload, loading: false };
     case 'SET_CURRENT_PAGE':

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Search, X } from 'lucide-react';
 import { useApp } from '../context/AppContext';
+import { searchRepositories } from '../services/githubApi';
 import { useDebounce } from '../hooks/useDebounce';
 
 export function SearchBar() {
@@ -21,6 +22,19 @@ export function SearchBar() {
     dispatch({ type: 'SET_QUERY', payload: query });
     dispatch({ type: 'SET_CURRENT_PAGE', payload: 1 });
     dispatch({ type: 'SET_HAS_SEARCHED', payload: true });
+
+    try {
+      const data = await searchRepositories(query, 1);
+      dispatch({ 
+        type: 'SET_REPOSITORIES', 
+        payload: { repositories: data.items, totalCount: data.total_count } 
+      });
+    } catch (error) {
+      dispatch({ 
+        type: 'SET_ERROR', 
+        payload: error instanceof Error ? error.message : 'An error occurred while searching' 
+      });
+    }
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -33,6 +47,7 @@ export function SearchBar() {
   const clearSearch = () => {
     setInputValue('');
     dispatch({ type: 'SET_QUERY', payload: '' });
+    dispatch({ type: 'SET_REPOSITORIES', payload: { repositories: [], totalCount: 0 } });
     dispatch({ type: 'SET_HAS_SEARCHED', payload: false });
   };
 
