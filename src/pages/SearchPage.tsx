@@ -1,6 +1,7 @@
 import { SearchBar } from '../components/SearchBar';
 import { RepositoryList } from '../components/RepositoryList';
 import { Github } from 'lucide-react';
+import { Pagination } from '../components/Pagination';
 
 export function SearchPage() {
   return (
@@ -21,7 +22,8 @@ export function SearchPage() {
         <div className="bg-white rounded-2xl shadow-sm p-6 mb-8">
           <RepositoryList />
         </div>
-
+      
+        <Pagination />
       </div>
     </div>
   );
