@@ -1,6 +1,6 @@
 import { Repository, SearchResponse } from '../types';
 
-const BASE_URL = import.meta.env.VITE_GITHUB_URL;
+const BASE_URL = 'https://api.github.com';
 
 class ApiError extends Error {
   constructor(message: string, public status: number) {

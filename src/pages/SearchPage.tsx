@@ -1,7 +1,7 @@
-import { SearchBar } from '../components/SearchBar';
-import { RepositoryList } from '../components/RepositoryList';
-import { Github } from 'lucide-react';
-import { Pagination } from '../components/Pagination';
+import { SearchBar } from "../components/SearchBar";
+import { RepositoryList } from "../components/RepositoryList";
+import { Github } from "lucide-react";
+import { Pagination } from "../components/Pagination";
 
 export function SearchPage() {
   return (
@@ -11,8 +11,12 @@ export function SearchPage() {
           <div className="flex items-center justify-center mb-4">
             <Github className="w-12 h-12 text-gray-900" />
           </div>
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">GitHub Repository Explorer</h1>
-          <p className="text-gray-600 text-lg">Discover and explore amazing GitHub repositories</p>
+          <h1 className="text-4xl font-bold text-gray-900 mb-2">
+            GitHub Repository Explorer
+          </h1>
+          <p className="text-gray-600 text-lg">
+            Discover and explore amazing GitHub repositories
+          </p>
         </div>
 
         <div className="mb-8">
@@ -22,7 +26,7 @@ export function SearchPage() {
         <div className="bg-white rounded-2xl shadow-sm p-6 mb-8">
           <RepositoryList />
         </div>
-      
+
         <Pagination />
       </div>
     </div>

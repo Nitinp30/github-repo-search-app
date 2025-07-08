@@ -75,7 +75,7 @@ export function SearchBar() {
         </div>
         {state.loading && (
           <div className="absolute right-4 top-1/2 transform -translate-y-1/2">
-            <div className="animate-spin rounded-full h-5 w-5 border-2 border-blue-500 border-t-transparent"></div>
+            <div role="status" className="animate-spin rounded-full h-5 w-5 border-2 border-blue-500 border-t-transparent"></div>
           </div>
         )}
       </form>
