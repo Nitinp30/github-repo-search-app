@@ -1,15 +1,14 @@
-import { Star, GitFork, AlertCircle, ExternalLink } from 'lucide-react';
-import { Repository } from '../types';
-import { Link } from 'react-router-dom';
-import { getLanguageColor } from '../utils/languageColors';
-import { formatNumber } from '../utils/format';
+import { Star, GitFork, AlertCircle, ExternalLink } from "lucide-react";
+import { Repository } from "../types";
+import { Link } from "react-router-dom";
+import { getLanguageColor } from "../utils/languageColors";
+import { formatNumber } from "../utils/format";
 
 interface RepositoryCardProps {
   repository: Repository;
 }
 
 export function RepositoryCard({ repository }: RepositoryCardProps) {
-
   return (
     <div className="bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-200 border border-gray-100 overflow-hidden group">
       <div className="p-6">
@@ -41,28 +40,38 @@ export function RepositoryCard({ repository }: RepositoryCardProps) {
         </div>
 
         <p className="text-gray-600 mb-4 line-clamp-2">
-          {repository.description || 'No description available'}
+          {repository.description || "No description available"}
         </p>
 
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-6">
             <div className="flex items-center space-x-1 text-gray-500">
               <Star className="w-4 h-4" />
-              <span className="text-sm font-medium">{formatNumber(repository.stargazers_count)}</span>
+              <span className="text-sm font-medium">
+                {formatNumber(repository.stargazers_count)}
+              </span>
             </div>
             <div className="flex items-center space-x-1 text-gray-500">
               <GitFork className="w-4 h-4" />
-              <span className="text-sm font-medium">{formatNumber(repository.forks_count)}</span>
+              <span className="text-sm font-medium">
+                {formatNumber(repository.forks_count)}
+              </span>
             </div>
             <div className="flex items-center space-x-1 text-gray-500">
               <AlertCircle className="w-4 h-4" />
-              <span className="text-sm font-medium">{formatNumber(repository.open_issues_count)}</span>
+              <span className="text-sm font-medium">
+                {formatNumber(repository.open_issues_count)}
+              </span>
             </div>
           </div>
           {repository.language && (
             <div className="flex items-center space-x-2">
-              <div className={`w-3 h-3 rounded-full ${getLanguageColor(repository.language)}`}></div>
-              <span className="text-sm text-gray-600">{repository.language}</span>
+              <div
+                className={`w-3 h-3 rounded-full ${getLanguageColor(repository.language)}`}
+              ></div>
+              <span className="text-sm text-gray-600">
+                {repository.language}
+              </span>
             </div>
           )}
         </div>

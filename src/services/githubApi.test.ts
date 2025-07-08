@@ -51,7 +51,7 @@ describe("GitHub API Service", () => {
 
     it("should throw error on empty query", async () => {
       await expect(searchRepositories("", 1)).rejects.toThrow(
-        "Search query cannot be empty."
+        "Search query cannot be empty.",
       );
     });
   });

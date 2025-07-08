@@ -33,9 +33,12 @@ export interface AppState {
 }
 
 export type AppAction =
-  | { type: 'SET_LOADING'; payload: boolean }
-  | { type: 'SET_REPOSITORIES'; payload: { repositories: Repository[]; totalCount: number } }
-  | { type: 'SET_ERROR'; payload: string | null }
-  | { type: 'SET_CURRENT_PAGE'; payload: number }
-  | { type: 'SET_QUERY'; payload: string }
-  | { type: 'SET_HAS_SEARCHED'; payload: boolean };
+  | { type: "SET_LOADING"; payload: boolean }
+  | {
+      type: "SET_REPOSITORIES";
+      payload: { repositories: Repository[]; totalCount: number };
+    }
+  | { type: "SET_ERROR"; payload: string | null }
+  | { type: "SET_CURRENT_PAGE"; payload: number }
+  | { type: "SET_QUERY"; payload: string }
+  | { type: "SET_HAS_SEARCHED"; payload: boolean };

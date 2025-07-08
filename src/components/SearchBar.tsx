@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { Search, X } from 'lucide-react';
-import { useApp } from '../context/AppContext';
-import { searchRepositories } from '../services/githubApi';
-import { useDebounce } from '../hooks/useDebounce';
+import React, { useState, useEffect } from "react";
+import { Search, X } from "lucide-react";
+import { useApp } from "../context/AppContext";
+import { searchRepositories } from "../services/githubApi";
+import { useDebounce } from "../hooks/useDebounce";
 
 export function SearchBar() {
   const { state, dispatch } = useApp();
@@ -18,21 +18,24 @@ export function SearchBar() {
   const handleSearch = async (query: string) => {
     if (!query.trim()) return;
 
-    dispatch({ type: 'SET_LOADING', payload: true });
-    dispatch({ type: 'SET_QUERY', payload: query });
-    dispatch({ type: 'SET_CURRENT_PAGE', payload: 1 });
-    dispatch({ type: 'SET_HAS_SEARCHED', payload: true });
+    dispatch({ type: "SET_LOADING", payload: true });
+    dispatch({ type: "SET_QUERY", payload: query });
+    dispatch({ type: "SET_CURRENT_PAGE", payload: 1 });
+    dispatch({ type: "SET_HAS_SEARCHED", payload: true });
 
     try {
       const data = await searchRepositories(query, 1);
-      dispatch({ 
-        type: 'SET_REPOSITORIES', 
-        payload: { repositories: data.items, totalCount: data.total_count } 
+      dispatch({
+        type: "SET_REPOSITORIES",
+        payload: { repositories: data.items, totalCount: data.total_count },
       });
     } catch (error) {
-      dispatch({ 
-        type: 'SET_ERROR', 
-        payload: error instanceof Error ? error.message : 'An error occurred while searching' 
+      dispatch({
+        type: "SET_ERROR",
+        payload:
+          error instanceof Error
+            ? error.message
+            : "An error occurred while searching",
       });
     }
   };
@@ -45,10 +48,13 @@ export function SearchBar() {
   };
 
   const clearSearch = () => {
-    setInputValue('');
-    dispatch({ type: 'SET_QUERY', payload: '' });
-    dispatch({ type: 'SET_REPOSITORIES', payload: { repositories: [], totalCount: 0 } });
-    dispatch({ type: 'SET_HAS_SEARCHED', payload: false });
+    setInputValue("");
+    dispatch({ type: "SET_QUERY", payload: "" });
+    dispatch({
+      type: "SET_REPOSITORIES",
+      payload: { repositories: [], totalCount: 0 },
+    });
+    dispatch({ type: "SET_HAS_SEARCHED", payload: false });
   };
 
   return (
@@ -75,7 +81,10 @@ export function SearchBar() {
         </div>
         {state.loading && (
           <div className="absolute right-4 top-1/2 transform -translate-y-1/2">
-            <div role="status" className="animate-spin rounded-full h-5 w-5 border-2 border-blue-500 border-t-transparent"></div>
+            <div
+              role="status"
+              className="animate-spin rounded-full h-5 w-5 border-2 border-blue-500 border-t-transparent"
+            ></div>
           </div>
         )}
       </form>

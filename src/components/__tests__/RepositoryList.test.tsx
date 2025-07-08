@@ -1,48 +1,48 @@
-import { render, screen } from '@testing-library/react'
-import { RepositoryList } from '../RepositoryList'
-import { vi } from 'vitest'
+import { render, screen } from "@testing-library/react";
+import { RepositoryList } from "../RepositoryList";
+import { vi } from "vitest";
 
 // ✅ Mock RepositoryCard
-vi.mock('../RepositoryCard', () => ({
+vi.mock("../RepositoryCard", () => ({
   RepositoryCard: ({ repository }: any) => (
     <div data-testid="RepositoryCard">{repository.name}</div>
   ),
-}))
+}));
 
 // ✅ Mock useApp()
-vi.mock('../../context/AppContext', () => ({
+vi.mock("../../context/AppContext", () => ({
   useApp: vi.fn(),
-}))
+}));
 
-import { useApp } from '../../context/AppContext'
+import { useApp } from "../../context/AppContext";
 
-describe('RepositoryList', () => {
+describe("RepositoryList", () => {
   afterEach(() => {
-    vi.clearAllMocks()
-  })
+    vi.clearAllMocks();
+  });
 
-  it('shows loading spinner when loading', () => {
+  it("shows loading spinner when loading", () => {
     // @ts-ignore
     useApp.mockReturnValue({
       state: { loading: true },
-    })
+    });
 
-    render(<RepositoryList />)
-    expect(screen.getByText(/searching repositories/i)).toBeInTheDocument()
-  })
+    render(<RepositoryList />);
+    expect(screen.getByText(/searching repositories/i)).toBeInTheDocument();
+  });
 
-  it('shows error message on error', () => {
+  it("shows error message on error", () => {
     // @ts-ignore
     useApp.mockReturnValue({
-      state: { error: 'Something went wrong', loading: false },
-    })
+      state: { error: "Something went wrong", loading: false },
+    });
 
-    render(<RepositoryList />)
-    expect(screen.getByText(/oops! something went wrong/i)).toBeInTheDocument()
-    expect(screen.getByText('Something went wrong')).toBeInTheDocument()
-  })
+    render(<RepositoryList />);
+    expect(screen.getByText(/oops! something went wrong/i)).toBeInTheDocument();
+    expect(screen.getByText("Something went wrong")).toBeInTheDocument();
+  });
 
-  it('shows no results when search was made but no repositories found', () => {
+  it("shows no results when search was made but no repositories found", () => {
     // @ts-ignore
     useApp.mockReturnValue({
       state: {
@@ -51,13 +51,13 @@ describe('RepositoryList', () => {
         hasSearched: true,
         repositories: [],
       },
-    })
+    });
 
-    render(<RepositoryList />)
-    expect(screen.getByText(/no repositories found/i)).toBeInTheDocument()
-  })
+    render(<RepositoryList />);
+    expect(screen.getByText(/no repositories found/i)).toBeInTheDocument();
+  });
 
-  it('shows prompt when no search has been made yet', () => {
+  it("shows prompt when no search has been made yet", () => {
     // @ts-ignore
     useApp.mockReturnValue({
       state: {
@@ -66,23 +66,23 @@ describe('RepositoryList', () => {
         hasSearched: false,
         repositories: [],
       },
-    })
+    });
 
-    render(<RepositoryList />)
-    expect(screen.getByText(/start your search/i)).toBeInTheDocument()
-  })
+    render(<RepositoryList />);
+    expect(screen.getByText(/start your search/i)).toBeInTheDocument();
+  });
 
-  it('renders list of repositories when data is available', () => {
+  it("renders list of repositories when data is available", () => {
     const mockRepos = [
       {
         id: 1,
-        name: 'vite',
+        name: "vite",
       },
       {
         id: 2,
-        name: 'react',
+        name: "react",
       },
-    ]
+    ];
 
     // @ts-ignore
     useApp.mockReturnValue({
@@ -92,14 +92,16 @@ describe('RepositoryList', () => {
         hasSearched: true,
         repositories: mockRepos,
         totalCount: 2,
-        query: 'js',
+        query: "js",
       },
-    })
+    });
 
-    render(<RepositoryList />)
-    expect(screen.getByText('Found 2 repositories for "js"')).toBeInTheDocument()
-    expect(screen.getAllByTestId('RepositoryCard')).toHaveLength(2)
-    expect(screen.getByText('vite')).toBeInTheDocument()
-    expect(screen.getByText('react')).toBeInTheDocument()
-  })
-})
+    render(<RepositoryList />);
+    expect(
+      screen.getByText('Found 2 repositories for "js"'),
+    ).toBeInTheDocument();
+    expect(screen.getAllByTestId("RepositoryCard")).toHaveLength(2);
+    expect(screen.getByText("vite")).toBeInTheDocument();
+    expect(screen.getByText("react")).toBeInTheDocument();
+  });
+});

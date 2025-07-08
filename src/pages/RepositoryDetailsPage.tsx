@@ -36,7 +36,7 @@ export function RepositoryDetailsPage() {
         setError(
           err instanceof Error
             ? err.message
-            : "Failed to load repository details"
+            : "Failed to load repository details",
         );
       } finally {
         setLoading(false);
@@ -139,7 +139,7 @@ export function RepositoryDetailsPage() {
                     <div className="flex items-center space-x-3">
                       <div
                         className={`w-4 h-4 rounded-full ${getLanguageColor(
-                          repository.language
+                          repository.language,
                         )}`}
                       ></div>
                       <span className="text-gray-700">

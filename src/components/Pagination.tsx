@@ -1,6 +1,6 @@
-import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { useApp } from '../context/AppContext';
-import { searchRepositories } from '../services/githubApi';
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useApp } from "../context/AppContext";
+import { searchRepositories } from "../services/githubApi";
 
 export function Pagination() {
   const { state, dispatch } = useApp();
@@ -11,24 +11,31 @@ export function Pagination() {
   const handlePageChange = async (newPage: number) => {
     if (newPage < 1 || newPage > totalPages || newPage === currentPage) return;
 
-    dispatch({ type: 'SET_LOADING', payload: true });
-    dispatch({ type: 'SET_CURRENT_PAGE', payload: newPage });
+    dispatch({ type: "SET_LOADING", payload: true });
+    dispatch({ type: "SET_CURRENT_PAGE", payload: newPage });
 
     try {
       const data = await searchRepositories(state.query, newPage);
-      dispatch({ 
-        type: 'SET_REPOSITORIES', 
-        payload: { repositories: data.items, totalCount: data.total_count } 
+      dispatch({
+        type: "SET_REPOSITORIES",
+        payload: { repositories: data.items, totalCount: data.total_count },
       });
     } catch (error) {
-      dispatch({ 
-        type: 'SET_ERROR', 
-        payload: error instanceof Error ? error.message : 'An error occurred while loading results' 
+      dispatch({
+        type: "SET_ERROR",
+        payload:
+          error instanceof Error
+            ? error.message
+            : "An error occurred while loading results",
       });
     }
   };
 
-  if (!state.hasSearched || state.repositories.length === 0 || totalPages <= 1) {
+  if (
+    !state.hasSearched ||
+    state.repositories.length === 0 ||
+    totalPages <= 1
+  ) {
     return null;
   }
 
@@ -37,12 +44,16 @@ export function Pagination() {
     const range = [];
     const rangeWithDots = [];
 
-    for (let i = Math.max(2, currentPage - delta); i <= Math.min(totalPages - 1, currentPage + delta); i++) {
+    for (
+      let i = Math.max(2, currentPage - delta);
+      i <= Math.min(totalPages - 1, currentPage + delta);
+      i++
+    ) {
       range.push(i);
     }
 
     if (currentPage - delta > 2) {
-      rangeWithDots.push(1, '...');
+      rangeWithDots.push(1, "...");
     } else {
       rangeWithDots.push(1);
     }
@@ -50,7 +61,7 @@ export function Pagination() {
     rangeWithDots.push(...range);
 
     if (currentPage + delta < totalPages - 1) {
-      rangeWithDots.push('...', totalPages);
+      rangeWithDots.push("...", totalPages);
     } else {
       rangeWithDots.push(totalPages);
     }
@@ -73,14 +84,16 @@ export function Pagination() {
         {getPageNumbers().map((page, index) => (
           <button
             key={index}
-            onClick={() => typeof page === 'number' ? handlePageChange(page) : undefined}
-            disabled={page === '...'}
+            onClick={() =>
+              typeof page === "number" ? handlePageChange(page) : undefined
+            }
+            disabled={page === "..."}
             className={`px-3 py-2 text-sm font-medium rounded-lg transition-colors ${
               page === currentPage
-                ? 'bg-blue-600 text-white'
-                : page === '...'
-                ? 'text-gray-400 cursor-default'
-                : 'text-gray-700 bg-white border border-gray-300 hover:bg-gray-50'
+                ? "bg-blue-600 text-white"
+                : page === "..."
+                  ? "text-gray-400 cursor-default"
+                  : "text-gray-700 bg-white border border-gray-300 hover:bg-gray-50"
             }`}
           >
             {page}

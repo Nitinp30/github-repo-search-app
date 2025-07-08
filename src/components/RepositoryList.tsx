@@ -1,6 +1,6 @@
-import { RepositoryCard } from './RepositoryCard';
-import { useApp } from '../context/AppContext';
-import { AlertCircle, Search } from 'lucide-react';
+import { RepositoryCard } from "./RepositoryCard";
+import { useApp } from "../context/AppContext";
+import { AlertCircle, Search } from "lucide-react";
 
 export function RepositoryList() {
   const { state } = useApp();
@@ -21,7 +21,9 @@ export function RepositoryList() {
       <div className="flex items-center justify-center py-12">
         <div className="text-center">
           <AlertCircle className="w-16 h-16 text-red-500 mx-auto mb-4" />
-          <h3 className="text-xl font-semibold text-gray-900 mb-2">Oops! Something went wrong</h3>
+          <h3 className="text-xl font-semibold text-gray-900 mb-2">
+            Oops! Something went wrong
+          </h3>
           <p className="text-gray-600 max-w-md mx-auto">{state.error}</p>
         </div>
       </div>
@@ -33,8 +35,12 @@ export function RepositoryList() {
       <div className="flex items-center justify-center py-12">
         <div className="text-center">
           <Search className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-          <h3 className="text-xl font-semibold text-gray-900 mb-2">No repositories found</h3>
-          <p className="text-gray-600">Try adjusting your search query or check for typos.</p>
+          <h3 className="text-xl font-semibold text-gray-900 mb-2">
+            No repositories found
+          </h3>
+          <p className="text-gray-600">
+            Try adjusting your search query or check for typos.
+          </p>
         </div>
       </div>
     );
@@ -45,8 +51,12 @@ export function RepositoryList() {
       <div className="flex items-center justify-center py-12">
         <div className="text-center">
           <Search className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-          <h3 className="text-xl font-semibold text-gray-900 mb-2">Start your search</h3>
-          <p className="text-gray-600">Enter a keyword to find GitHub repositories.</p>
+          <h3 className="text-xl font-semibold text-gray-900 mb-2">
+            Start your search
+          </h3>
+          <p className="text-gray-600">
+            Enter a keyword to find GitHub repositories.
+          </p>
         </div>
       </div>
     );
@@ -56,7 +66,8 @@ export function RepositoryList() {
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <p className="text-gray-600">
-          Found {state.totalCount.toLocaleString()} repositories for "{state.query}"
+          Found {state.totalCount.toLocaleString()} repositories for "
+          {state.query}"
         </p>
       </div>
       <div className="grid gap-4">
