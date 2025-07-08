@@ -13,7 +13,6 @@ vi.mock("react-router-dom", async (importOriginal) => {
   };
 });
 
-// 🧪 Mock API
 vi.mock("../../services/githubApi", () => ({
   getRepositoryDetails: vi.fn(),
 }));
@@ -51,10 +50,8 @@ describe("RepositoryDetailsPage", () => {
       </MemoryRouter>,
     );
 
-    // ✅ Shows loading spinner initially
     expect(screen.getByRole("status")).toBeInTheDocument();
 
-    // ✅ Wait for repository name to appear
     await waitFor(() => {
       expect(screen.getByText("vite")).toBeInTheDocument();
     });

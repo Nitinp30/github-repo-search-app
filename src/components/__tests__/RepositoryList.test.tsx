@@ -2,14 +2,12 @@ import { render, screen } from "@testing-library/react";
 import { RepositoryList } from "../RepositoryList";
 import { vi } from "vitest";
 
-// ✅ Mock RepositoryCard
 vi.mock("../RepositoryCard", () => ({
   RepositoryCard: ({ repository }: any) => (
     <div data-testid="RepositoryCard">{repository.name}</div>
   ),
 }));
 
-// ✅ Mock useApp()
 vi.mock("../../context/AppContext", () => ({
   useApp: vi.fn(),
 }));

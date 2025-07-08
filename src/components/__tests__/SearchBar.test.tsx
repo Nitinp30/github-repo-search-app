@@ -2,19 +2,16 @@ import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { SearchBar } from "../SearchBar";
 import { vi } from "vitest";
 
-// Mock useApp hook
 vi.mock("../../context/AppContext", () => {
   return {
     useApp: vi.fn(),
   };
 });
 
-// Mock useDebounce
 vi.mock("../../hooks/useDebounce", () => ({
   useDebounce: (value: string) => value,
 }));
 
-// Mock API
 vi.mock("../../services/githubApi", () => ({
   searchRepositories: vi.fn(),
 }));

@@ -26,18 +26,14 @@ describe("useDebounce", () => {
 
     expect(result.current).toBe("one");
 
-    // Change value before delay
     rerender({ value: "two", delay: 300 });
 
-    // Value hasn't updated yet
     expect(result.current).toBe("one");
 
-    // Fast-forward time
     act(() => {
       vi.advanceTimersByTime(300);
     });
 
-    // Debounced value should now be updated
     expect(result.current).toBe("two");
   });
 

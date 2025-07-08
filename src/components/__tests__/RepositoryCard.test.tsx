@@ -3,7 +3,6 @@ import { RepositoryCard } from "../RepositoryCard";
 import { BrowserRouter } from "react-router-dom";
 import { describe, it, expect, vi } from "vitest";
 
-// ✅ Mock util functions
 vi.mock("../../utils/format", () => ({
   formatNumber: (num: number) => `#${num}`,
 }));
@@ -12,7 +11,7 @@ vi.mock("../../utils/languageColors", () => ({
   getLanguageColor: (lang: string) => "bg-red-500",
 }));
 
-// ✅ Mock repo data
+//TODO: ✅ Mock repo data
 const mockRepo = {
   id: 1,
   name: "vite",
@@ -39,23 +38,18 @@ describe("RepositoryCard", () => {
       </BrowserRouter>,
     );
 
-    // ✅ Avatar & name
     expect(screen.getByAltText("vitejs")).toBeInTheDocument();
     expect(screen.getByText("vite")).toBeInTheDocument();
     expect(screen.getByText("vitejs")).toBeInTheDocument();
 
-    // ✅ Description
     expect(screen.getByText("Fast frontend tooling")).toBeInTheDocument();
 
-    // ✅ Stats
     expect(screen.getByText("#12345")).toBeInTheDocument();
     expect(screen.getByText("#6789")).toBeInTheDocument();
     expect(screen.getByText("#10")).toBeInTheDocument();
 
-    // ✅ Language
     expect(screen.getByText("TypeScript")).toBeInTheDocument();
 
-    // ✅ External link
     expect(screen.getByRole("link", { name: "" })).toHaveAttribute(
       "href",
       "https://github.com/vitejs/vite",

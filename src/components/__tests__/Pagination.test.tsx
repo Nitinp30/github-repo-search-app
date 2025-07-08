@@ -4,10 +4,8 @@ import * as githubApi from "../../services/githubApi";
 import React from "react";
 import { vi } from "vitest";
 
-// Mock the searchRepositories API
 vi.mock("../../services/githubApi");
 
-// Base mock state
 let customState = {
   repositories: [
     { id: 1, name: "test-repo", owner: { login: "user", avatar_url: "" } },
@@ -20,10 +18,8 @@ let customState = {
   error: null,
 };
 
-// Mock dispatch function
 const mockDispatch = vi.fn();
 
-// Mock useApp using the current customState
 vi.mock("../../context/AppContext", () => ({
   useApp: () => ({
     state: customState,
@@ -35,7 +31,6 @@ describe("Pagination", () => {
   beforeEach(() => {
     vi.clearAllMocks();
 
-    // Reset state before each test
     customState = {
       repositories: [
         { id: 1, name: "test-repo", owner: { login: "user", avatar_url: "" } },
@@ -94,8 +89,8 @@ describe("Pagination", () => {
   });
 
   it("disables next button on last page", () => {
-    customState.currentPage = 3; // Last page
-    customState.totalCount = 30; // 3 pages max
+    customState.currentPage = 3;
+    customState.totalCount = 30;
     render(<Pagination />);
     const nextBtn = screen.getByRole("button", { name: /Next/i });
     expect(nextBtn).toBeDisabled();
